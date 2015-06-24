@@ -6,7 +6,7 @@ Cyler Norman Conrad (cylerc@unm.edu)
 
 This repository contains R scripts to create figures and analyze data for the Arroyo Hondo Pueblo isotope data.
 
-Written by Cyler Conrad, Department of Anthropology, University of New Mexico cylerc@unm.edu
+Written by Cyler Conrad, Department of Anthropology, University of New Mexico 
 
 Results described in:
 
@@ -16,8 +16,7 @@ NOTES All data required to perform the analyses can be found at XXXX (Conrad in 
 
 Reference: Conrad, C. 2015. XXXX
 
-
-LICENSE
+License:
 
 The MIT License (MIT)
 
@@ -28,3 +27,7 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+Contact:
+
+Cyler Norman Conrad, Ph.D. Graduate Student, Department of Anthropology, MSC01-1040, Anthropology 1, University of New Mexico, Albuquerque, NM, 87131 USA t. (+1) 505.277.4524 e. cylerc@unm.edu 
