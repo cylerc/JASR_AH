@@ -1,0 +1,112 @@
+```{r}
+#########################################################################################
+# R scripts for Arroyo Hondo Pueblo turkey isotope data
+# 
+# written by Cyler Conrad, Department of Anthropology, University of New Mexico
+# cylerc@unm.edu
+#
+# Results described in:
+# Conrad, C., Jones, E.L., Newsome, S.D. and Schwartz, D.W. (in preparation). Egg Use 
+# and Turkey Husbandry at Arroyo Hondo Pueblo (LA 12), New Mexico. Journal of 
+# Archaeoloical Science: Reports.
+#
+#
+# NOTES
+# All data required to perform the analyses can be found at
+# XXXX (Conrad XXXX). The script was run using R 
+# version 3.1.1 on Mac OS X 10.8.5
+#
+# Reference: 
+#
+# LICENSE
+# 
+# The MIT License (MIT)
+# 
+# Copyright (c) 2015 Cyler Conrad
+#   
+#   Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#   
+#   The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+# 
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+# THE SOFTWARE.
+################################################################################
+# set the base directory for knitr to the directory above this one
+library(knitr)
+opts_knit$set(root.dir = '../')
+```
+
+```{r}
+################################################################################
+# CHUNK 1: Load libraries.
+################################################################################
+
+library(ggplot2) #Version 1.0.0
+
+```
+
+```{r}
+################################################################################
+# CHUNK 2-Figure 5: Plot of carbon and nitrogen isotopic data from Arroyo Hondo Pueblo.
+################################################################################
+
+fn <- "data/AH_Iso.csv"
+turkey <- read.csv(fn, stringsAsFactors = FALSE, check.names = FALSE)
+turkey
+str(turkey) 
+
+ggplot(turkey, aes(x = d13C, y = d15N)) + 
+  geom_point(aes(), size=3.5) + 
+  xlab(expression(paste(delta^{13},'C'))) + 
+  ylab(expression(paste(delta^{15},'N'))) + 
+  xlim(-25.0,-5.0) +
+  ylim(3.0,12.0) +
+  theme(
+  legend.position="",
+  axis.text.x = element_text(vjust=0.5, color="black", size=15, face="bold"),
+  axis.text.y = element_text(vjust=0.5, color="black", size=15, face="bold"), 
+  axis.title.y = element_text(vjust=1.0, color="black", size=18, face="bold"),
+  axis.title.x = element_text(vjust=0.1, color="black", size=18, face="bold"),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(), 
+  panel.background = element_blank(), 
+  axis.line = element_line(colour = "black"))
+
+# save plot
+fig_width <- 300 # play with this number
+ggsave(filename = "figures/fig_5.png",
+       dpi = 300, units = "mm",
+       height = fig_width/1.6, width =  fig_width)
+```
+
+```{r}
+################################################################################
+# CHUNK 3-Analysis: Calculation of means and standard deviations for carbon and nitrogen
+# isotopic data. 
+################################################################################
+
+turkey
+mean(turkey$d13C)
+#-8.22625
+sd(turkey$d13C)
+#1.841556
+mean(turkey$d15N)
+#9.02125
+sd(turkey$d15N)
+#1.424976
+
+```
+
+
+
