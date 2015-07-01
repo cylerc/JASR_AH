@@ -1,14 +1,12 @@
 ```{r}
 #########################################################################################
-# R scripts for Arroyo Hondo Pueblo turkey isotope data
+# R scripts for Arroyo Hondo Pueblo turkey isotope and faunal data.
 # 
 # written by Cyler Conrad, Department of Anthropology, University of New Mexico
 # cylerc@unm.edu
 #
 # Results described in:
-# Conrad, C., Jones, E.L., Newsome, S.D. and Schwartz, D.W. (in preparation). Egg Use 
-# and Turkey Husbandry at Arroyo Hondo Pueblo (LA 12), New Mexico. Journal of 
-# Archaeoloical Science: Reports.
+# Conrad, C., Jones, E.L., Newsome, S.D. and Schwartz, D.W. (in preparation). Egg Use and Turkey Husbandry at Arroyo Hondo Pueblo (LA 12), New Mexico. Journal of Archaeoloical Science: Reports.
 #
 #
 # NOTES
@@ -24,12 +22,7 @@
 # 
 # Copyright (c) 2015 Cyler Conrad
 #   
-#   Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
+#   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 #   
 #   The above copyright notice and this permission notice shall be included in
 # all copies or substantial portions of the Software.
@@ -48,17 +41,18 @@ opts_knit$set(root.dir = '../')
 ```
 
 ```{r}
-################################################################################
+###############################################################################
 # CHUNK 1: Load libraries.
 ################################################################################
 
 library(ggplot2) #Version 1.0.0
+library(reshape2)
 
 ```
 
 ```{r}
-################################################################################
-# CHUNK 2-Figure 5: Plot of carbon and nitrogen isotopic data from Arroyo Hondo Pueblo.
+###############################################################################
+# CHUNK 2-Figure 7: Plot of carbon and nitrogen isotopic data from Arroyo Hondo Pueblo.
 ################################################################################
 
 fn <- "data/AH_Iso.csv"
@@ -91,9 +85,8 @@ ggsave(filename = "figures/fig_5.png",
 ```
 
 ```{r}
-################################################################################
-# CHUNK 3-Analysis: Calculation of means and standard deviations for carbon and nitrogen
-# isotopic data. 
+###############################################################################
+# CHUNK 3-Analysis: Calculation of means and standard deviations for carbon and # nitrogen isotopic data. 
 ################################################################################
 
 turkey
@@ -106,6 +99,44 @@ mean(turkey$d15N)
 sd(turkey$d15N)
 #1.424976
 
+```
+
+```{r}
+###############################################################################
+# CHUNK 4-Figure 8: Plot of relative abundance and dietary evenness at
+# Arroyo Hondo Puelbo. 
+################################################################################
+
+fn <- "data/fig8.csv" 
+even <- read.csv(fn, stringsAsFactors = FALSE, check.names = FALSE)
+even
+str(even)
+
+even.long <- melt(even, value.name="Count")
+even.long  
+ggplot(even.long, aes(`Date (C.E.)`, Count, group = 1)) +
+  geom_point(size = 4) +
+  geom_line() +
+  ylim(0.0,1.0) +
+  facet_wrap(~ variable) +
+  coord_flip() +
+  theme(
+  legend.position="",
+  axis.text.x = element_text(vjust=0.5, color="black", size=15, face="bold"),
+  axis.text.y = element_text(vjust=0.5, color="black", size=15, face="bold"), 
+  axis.title.y = element_text(vjust=1.0, color="black", size=18, face="bold"),
+  axis.title.x = element_text(vjust=0.1, color="black", size=18, face="bold"),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(), 
+  axis.line = element_line(colour = "black"),
+  strip.text.x = element_text(size=15),
+  strip.background = element_rect(colour="black", fill="white"))
+
+fig_width <- 300 # play with this number
+ggsave(filename = "figures/fig_8.png",
+       dpi = 300, units = "mm",
+       height = fig_width/1.6, width =  fig_width)
+  
 ```
 
 
