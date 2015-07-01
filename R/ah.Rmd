@@ -73,7 +73,8 @@ ggplot(ra, aes(ra$`Date (C.E.)`, ra$`Relative Abundance`)) +
   axis.title.y = element_text(vjust=1.0, color="black", size=18, face="bold"),
   axis.title.x = element_text(vjust=0.1, color="black", size=18, face="bold"),
   panel.grid.major = element_blank(),
-  panel.grid.minor = element_blank(), 
+  panel.grid.minor = element_blank(),
+  panel.background = element_blank(), 
   axis.line = element_line(colour = "black"),
   strip.text.x = element_text(size=15),
   strip.background = element_rect(colour="black", fill="white"))
@@ -108,6 +109,7 @@ ggplot(even, aes(even$`1/D`, even$`Date (C.E.)`, group=1)) +
   axis.title.x = element_text(vjust=0.1, color="black", size=18, face="bold"),
   panel.grid.major = element_blank(),
   panel.grid.minor = element_blank(), 
+  panel.background = element_blank(), 
   axis.line = element_line(colour = "black"),
   strip.text.x = element_text(size=15),
   strip.background = element_rect(colour="black", fill="white"))
