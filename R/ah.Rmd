@@ -52,7 +52,45 @@ library(reshape2)
 
 ```{r}
 ###############################################################################
-# CHUNK 2-Figure 7: Plot of carbon and nitrogen isotopic data from Arroyo Hondo Pueblo.
+# CHUNK 2-Figure 7: Plot of relative abundance and dietary evenness at
+# Arroyo Hondo Puelbo. 
+################################################################################
+
+fn <- "data/fig7.csv" 
+even <- read.csv(fn, stringsAsFactors = FALSE, check.names = FALSE)
+even
+str(even)
+
+even.long <- melt(even, value.name="Count")
+even.long  
+ggplot(even.long, aes(`Date (C.E.)`, Count, group = 1)) +
+  geom_point(size = 4) +
+  geom_line() +
+  ylim(0.0,1.0) +
+  facet_wrap(~ variable) +
+  coord_flip() +
+  theme(
+  legend.position="",
+  axis.text.x = element_text(vjust=0.5, color="black", size=15, face="bold"),
+  axis.text.y = element_text(vjust=0.5, color="black", size=15, face="bold"), 
+  axis.title.y = element_text(vjust=1.0, color="black", size=18, face="bold"),
+  axis.title.x = element_text(vjust=0.1, color="black", size=18, face="bold"),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(), 
+  axis.line = element_line(colour = "black"),
+  strip.text.x = element_text(size=15),
+  strip.background = element_rect(colour="black", fill="white"))
+
+fig_width <- 300 # play with this number
+ggsave(filename = "figures/fig_7.png",
+       dpi = 300, units = "mm",
+       height = fig_width/1.6, width =  fig_width)
+  
+```
+
+```{r}
+###############################################################################
+# CHUNK 3-Figure 8: Plot of carbon and nitrogen isotopic data from Arroyo Hondo Pueblo.
 ################################################################################
 
 fn <- "data/AH_Iso.csv"
@@ -79,14 +117,14 @@ ggplot(turkey, aes(x = d13C, y = d15N)) +
 
 # save plot
 fig_width <- 300 # play with this number
-ggsave(filename = "figures/fig_5.png",
+ggsave(filename = "figures/fig_8.png",
        dpi = 300, units = "mm",
        height = fig_width/1.6, width =  fig_width)
 ```
 
 ```{r}
 ###############################################################################
-# CHUNK 3-Analysis: Calculation of means and standard deviations for carbon and # nitrogen isotopic data. 
+# CHUNK 4-Analysis: Calculation of means and standard deviations for carbon and # nitrogen isotopic data. 
 ################################################################################
 
 turkey
@@ -98,46 +136,6 @@ mean(turkey$d15N)
 #9.02125
 sd(turkey$d15N)
 #1.424976
-
 ```
-
-```{r}
-###############################################################################
-# CHUNK 4-Figure 8: Plot of relative abundance and dietary evenness at
-# Arroyo Hondo Puelbo. 
-################################################################################
-
-fn <- "data/fig8.csv" 
-even <- read.csv(fn, stringsAsFactors = FALSE, check.names = FALSE)
-even
-str(even)
-
-even.long <- melt(even, value.name="Count")
-even.long  
-ggplot(even.long, aes(`Date (C.E.)`, Count, group = 1)) +
-  geom_point(size = 4) +
-  geom_line() +
-  ylim(0.0,1.0) +
-  facet_wrap(~ variable) +
-  coord_flip() +
-  theme(
-  legend.position="",
-  axis.text.x = element_text(vjust=0.5, color="black", size=15, face="bold"),
-  axis.text.y = element_text(vjust=0.5, color="black", size=15, face="bold"), 
-  axis.title.y = element_text(vjust=1.0, color="black", size=18, face="bold"),
-  axis.title.x = element_text(vjust=0.1, color="black", size=18, face="bold"),
-  panel.grid.major = element_blank(),
-  panel.grid.minor = element_blank(), 
-  axis.line = element_line(colour = "black"),
-  strip.text.x = element_text(size=15),
-  strip.background = element_rect(colour="black", fill="white"))
-
-fig_width <- 300 # play with this number
-ggsave(filename = "figures/fig_8.png",
-       dpi = 300, units = "mm",
-       height = fig_width/1.6, width =  fig_width)
-  
-```
-
 
 
