@@ -1,10 +1,10 @@
 # JASR_AH
-R script for Arroyo Hondo isotopic data. 
+R script for Arroyo Hondo isotopic and faunal data. 
 
 Authors of this repository:
 Cyler Norman Conrad (cylerc@unm.edu)
 
-This repository contains R scripts to create figures and analyze data for the Arroyo Hondo Pueblo isotope data.
+This repository contains R scripts to create figures and analyze data for the Arroyo Hondo Pueblo isotope and faunal data.
 
 Written by Cyler Conrad, Department of Anthropology, University of New Mexico 
 
