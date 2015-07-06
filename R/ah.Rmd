@@ -68,10 +68,10 @@ ggplot(ra, aes(ra$`Date (C.E.)`, ra$`Relative Abundance`)) +
   ylim(0.0,0.5) +
   theme(
   legend.position="",
-  axis.text.x = element_text(vjust=0.5, color="black", size=15, face="bold"),
-  axis.text.y = element_text(vjust=0.5, color="black", size=15, face="bold"), 
-  axis.title.y = element_text(vjust=1.0, color="black", size=18, face="bold"),
-  axis.title.x = element_text(vjust=0.1, color="black", size=18, face="bold"),
+  axis.text.x = element_text(vjust=0.5, color="black", size=18),
+  axis.text.y = element_text(vjust=0.5, color="black", size=18), 
+  axis.title.y = element_text(vjust=1.0, color="black", size=18),
+  axis.title.x = element_text(vjust=0.1, color="black", size=18),
   panel.grid.major = element_blank(),
   panel.grid.minor = element_blank(),
   panel.background = element_blank(), 
@@ -103,10 +103,10 @@ ggplot(even, aes(even$`1/D`, even$`Date (C.E.)`, group=1)) +
   ylab("Date (C.E.)") +
   theme(
   legend.position="",
-  axis.text.x = element_text(vjust=0.5, color="black", size=15, face="bold"),
-  axis.text.y = element_text(vjust=0.5, color="black", size=15, face="bold"), 
-  axis.title.y = element_text(vjust=1.0, color="black", size=18, face="bold"),
-  axis.title.x = element_text(vjust=0.1, color="black", size=18, face="bold"),
+  axis.text.x = element_text(vjust=0.5, color="black", size=18),
+  axis.text.y = element_text(vjust=0.5, color="black", size=18), 
+  axis.title.y = element_text(vjust=1.0, color="black", size=18),
+  axis.title.x = element_text(vjust=0.1, color="black", size=18),
   panel.grid.major = element_blank(),
   panel.grid.minor = element_blank(), 
   panel.background = element_blank(), 
@@ -135,14 +135,14 @@ ggplot(turkey, aes(x = d13C, y = d15N)) +
   geom_point(aes(), size=3.5) + 
   xlab(expression(paste(delta^{13},'C'))) + 
   ylab(expression(paste(delta^{15},'N'))) + 
-  xlim(-25.0,-5.0) +
-  ylim(3.0,12.0) +
+  xlim(-21.0,-5.0) +
+  ylim(2.0,12.0) +
   theme(
   legend.position="",
-  axis.text.x = element_text(vjust=0.5, color="black", size=15, face="bold"),
-  axis.text.y = element_text(vjust=0.5, color="black", size=15, face="bold"), 
-  axis.title.y = element_text(vjust=1.0, color="black", size=18, face="bold"),
-  axis.title.x = element_text(vjust=0.1, color="black", size=18, face="bold"),
+  axis.text.x = element_text(vjust=0.5, color="black", size=18),
+  axis.text.y = element_text(vjust=0.5, color="black", size=18), 
+  axis.title.y = element_text(vjust=1.0, color="black", size=22),
+  axis.title.x = element_text(vjust=0.1, color="black", size=22),
   panel.grid.major = element_blank(),
   panel.grid.minor = element_blank(), 
   panel.background = element_blank(), 
