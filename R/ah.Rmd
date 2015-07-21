@@ -6,12 +6,12 @@
 # cylerc@unm.edu
 #
 # Results described in:
-# Conrad, C., Jones, E.L., Newsome, S.D. and Schwartz, D.W. (in preparation). Egg Use and Turkey Husbandry at Arroyo Hondo Pueblo (LA 12), New Mexico. Journal of Archaeoloical Science: Reports.
+# Conrad, C., Jones, E.L., Newsome, S.D. and Schwartz, D.W. (in review). Eggshell, Bone Isotopes and Turkey Husbandry at Arroyo Hondo Pueblo. Journal of Archaeoloical Science: Reports.
 #
 #
 # NOTES
 # All data required to perform the analyses can be found at
-# XXXX (Conrad XXXX). The script was run using R 
+# XXXX (Conrad et al. XXXX). The script was run using R 
 # version 3.1.1 on Mac OS X 10.8.5
 #
 # Reference: 
@@ -52,10 +52,10 @@ library(reshape2)
 
 ```{r}
 ###############################################################################
-# CHUNK 2-Figure 7: Plot of relative abundance.
+# CHUNK 2-Figure 6a: Plot of relative abundance.
 ################################################################################
 
-fn <- "data/fig7.csv" 
+fn <- "data/fig6a.csv" 
 ra <- read.csv(fn, stringsAsFactors = FALSE, check.names = FALSE)
 ra
 str(ra)
@@ -65,7 +65,7 @@ ggplot(ra, aes(ra$`Date (C.E.)`, ra$`Relative Abundance`)) +
   coord_flip() +
   xlab("Date (C.E.)") +
   ylab("Relative Abundance") +
-  ylim(0.0,0.5) +
+  ylim(0.0,0.3) +
   theme(
   legend.position="",
   axis.text.x = element_text(vjust=0.5, color="black", size=18),
@@ -80,7 +80,7 @@ ggplot(ra, aes(ra$`Date (C.E.)`, ra$`Relative Abundance`)) +
   strip.background = element_rect(colour="black", fill="white"))
 
 fig_width <- 300 # play with this number
-ggsave(filename = "figures/fig_7.png",
+ggsave(filename = "figures/fig_6a.png",
        dpi = 600, units = "mm",
        height = fig_width/1.6, width =  fig_width)
   
@@ -88,10 +88,10 @@ ggsave(filename = "figures/fig_7.png",
 
 ```{r}
 ###############################################################################
-# CHUNK 3-Figure 8: Plot of 1/D.
+# CHUNK 3-Figure 6b: Plot of 1/D.
 ################################################################################
 
-fn <- "data/fig8.csv" 
+fn <- "data/fig6b.csv" 
 even <- read.csv(fn, stringsAsFactors = FALSE, check.names = FALSE)
 even
 str(even)
@@ -115,7 +115,7 @@ ggplot(even, aes(even$`1/D`, even$`Date (C.E.)`, group=1)) +
   strip.background = element_rect(colour="black", fill="white"))
 
 fig_width <- 300 # play with this number
-ggsave(filename = "figures/fig_8.png",
+ggsave(filename = "figures/fig_6b.png",
        dpi = 600, units = "mm",
        height = fig_width/1.6, width =  fig_width)
   
@@ -123,10 +123,10 @@ ggsave(filename = "figures/fig_8.png",
 
 ```{r}
 ###############################################################################
-# CHUNK 4-Figure 9: Plot of carbon and nitrogen isotopic data from Arroyo Hondo Pueblo.
+# CHUNK 4-Figure 7: Plot of carbon and nitrogen isotopic data from Arroyo Hondo Pueblo.
 ################################################################################
 
-fn <- "data/AH_Iso.csv"
+fn <- "data/fig7.csv"
 turkey <- read.csv(fn, stringsAsFactors = FALSE, check.names = FALSE)
 turkey
 str(turkey) 
@@ -150,7 +150,7 @@ ggplot(turkey, aes(x = d13C, y = d15N)) +
 
 # save plot
 fig_width <- 300 # play with this number
-ggsave(filename = "figures/fig_9.png",
+ggsave(filename = "figures/fig_7.png",
        dpi = 600, units = "mm",
        height = fig_width/1.6, width =  fig_width)
 ```
