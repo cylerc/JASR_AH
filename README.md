@@ -1,7 +1,7 @@
 # JASR_AH
 R script for Arroyo Hondo isotopic and faunal data. 
 
-Authors of this repository:
+Author of this repository:
 Cyler Norman Conrad (cylerc@unm.edu)
 
 This repository contains R scripts to create figures and analyze data for the Arroyo Hondo Pueblo isotope and faunal data.
@@ -10,11 +10,11 @@ Written by Cyler Conrad, Department of Anthropology, University of New Mexico
 
 Results described in:
 
-Conrad, C., Jones, E.L., Newsome, S.D. and Schwartz, D.W. (in preparation). Egg Use and Turkey Husbandry at Arroyo Hondo Pueblo (LA 12), New Mexico. Journal of Archaeoloical Science: Reports.
+Conrad, C., Jones, E.L., Newsome, S.D. and Schwartz, D.W. (in review). Eggshells, Bone Isotopes and Turkey Husbandry at Arroyo Hondo Pueblo. Journal of Archaeoloical Science: Reports.
 
-NOTES All data required to perform the analyses can be found at XXXX (Conrad in preparation). The script was run using R version 3.1.1 on Mac OS X 10.8.5
+NOTES All data required to perform the analyses can be found in (Conrad et al. XXXX). The script was run using R version 3.1.1 on Mac OS X 10.8.5
 
-Reference: Conrad, C. 2015. XXXX
+Reference: Conrad, C., Jones, E.L., Newsome, S.D. and Schwartz, D.W. XXXX
 
 License:
 
