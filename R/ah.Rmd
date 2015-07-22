@@ -6,7 +6,9 @@
 # cylerc@unm.edu
 #
 # Results described in:
-# Conrad, C., Jones, E.L., Newsome, S.D. and Schwartz, D.W. (in review). Eggshell, Bone Isotopes and Turkey Husbandry at Arroyo Hondo Pueblo. Journal of Archaeoloical Science: Reports.
+# Conrad, C., Jones, E.L., Newsome, S.D. and Schwartz, D.W. (in review). 
+# Eggshell, Bone Isotopes and Turkey Husbandry at Arroyo Hondo Pueblo. 
+# Journal of Archaeoloical Science: Reports.
 #
 #
 # NOTES
@@ -47,12 +49,42 @@ opts_knit$set(root.dir = '../')
 
 library(ggplot2) #Version 1.0.0
 library(reshape2)
+library(vegan)
 
 ```
 
 ```{r}
 ###############################################################################
-# CHUNK 2-Figure 6a: Plot of relative abundance.
+# CHUNK 2-Calculate relative abundance. First, upload the Arroyo Hondo NISP table.
+# Second, take all turkey NISP values and divide by the column totals to calculate
+# the relative abundance of turtles per stratum. 
+################################################################################
+fn <- "data/ahNISP.csv" 
+ah <- read.csv(fn, stringsAsFactors = FALSE, check.names = FALSE)
+ah
+#1300-1315
+51/(sum(ah$`1300-1315`))
+#1315-1330
+202/(sum(ah$`1315-1330`))
+#1330-1340
+186/(sum(ah$`1330-1340`))
+#1340-1355
+317/(sum(ah$`1340-1355`))
+#1355-1365
+83/(sum(ah$`1355-1365`))
+#1365-1370
+92/(sum(ah$`1365-1370`))
+#1380-1410
+51/(sum(ah$`1380-1410`))
+#1410-1425
+152/(sum(ah$`1410-1425`))
+```
+
+```{r}
+###############################################################################
+# CHUNK 3-Figure 6a: Plot of relative abundance. Use relative abundance
+# values that were previously calculated to create plot of changing abundance 
+# through time. 
 ################################################################################
 
 fn <- "data/fig6a.csv" 
@@ -88,7 +120,23 @@ ggsave(filename = "figures/fig_6a.png",
 
 ```{r}
 ###############################################################################
-# CHUNK 3-Figure 6b: Plot of 1/D.
+# CHUNK 4-Calculate taxonomic evenness. Use the diversity function in vegan to 
+# calculate the inverse of Simpson's per stratum. 
+################################################################################
+diversity(ah$`1300-1315`, index = "invsimpson")
+diversity(ah$`1315-1330`, index = "invsimpson")
+diversity(ah$`1330-1340`, index = "invsimpson")
+diversity(ah$`1340-1355`, index = "invsimpson")
+diversity(ah$`1355-1365`, index = "invsimpson")
+diversity(ah$`1365-1370`, index = "invsimpson")
+diversity(ah$`1380-1410`, index = "invsimpson")
+diversity(ah$`1410-1425`, index = "invsimpson")
+```
+
+```{r}
+###############################################################################
+# CHUNK 5-Figure 6b: Plot of 1/D. Use 1/D values that were previously 
+# calculated to plot changing evenness through time.
 ################################################################################
 
 fn <- "data/fig6b.csv" 
@@ -123,7 +171,7 @@ ggsave(filename = "figures/fig_6b.png",
 
 ```{r}
 ###############################################################################
-# CHUNK 4-Figure 7: Plot of carbon and nitrogen isotopic data from Arroyo Hondo Pueblo.
+# CHUNK 6-Figure 7: Plot of carbon and nitrogen isotopic data from Arroyo Hondo Pueblo.
 ################################################################################
 
 fn <- "data/fig7.csv"
@@ -157,7 +205,8 @@ ggsave(filename = "figures/fig_7.png",
 
 ```{r}
 ###############################################################################
-# CHUNK 5-Analysis: Calculation of means and standard deviations for carbon and # nitrogen isotopic data. 
+# CHUNK 7-Analysis: Calculate means and standard deviations for carbon and 
+# nitrogen isotopic data. 
 ################################################################################
 
 turkey
