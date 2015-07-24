@@ -37,15 +37,9 @@ library(dplyr)
 ah <- read.csv("data/ahNISP.csv", stringsAsFactors = FALSE, check.names = FALSE)
 kable(ah)
 
-# I replaced your code with more efficient code that show how R can work on vectors. The key idea is 'don't repeat yourself'. If you have the same line of code repeating with minor changes then you are not using the expressive power of R to save time!
-
-# here are all the turkey NISPs in a vectors
 turkey_NISP <- ah[ah$Taxon == "Meleagris gallopavo", -1]
-# here are the column totals (we drop the first column because it's a label)
 column_totals <- colSums(ah[ ,-1])
-# here's relative abundance for each time period, a vector divided by another vector, this is the magic of R!
 relative_abundance <-  turkey_NISP / column_totals
-# make into a tidy data frame ready for plotting
 relative_abundance <- t(relative_abundance)
 relative_abundance <- data_frame(`Date (C.E.)` = row.names(relative_abundance), 
                                  `Relative Abundance` = relative_abundance[,1])
@@ -95,9 +89,6 @@ ggsave(filename = "figures/fig_6a.png",
 # Calculate taxonomic evenness. Use the diversity function in vegan to 
 # calculate the inverse of Simpson's per stratum. 
 
-# Here we compute over all the columns with numeric data at the same time
-# We drop the first column because it is the labels (and so non-numeric)
-# We use ldply from the plyr package to get the results back in a nice data frame
 taxonomic_evenness <- ldply(ah[,-1],  function(i) diversity(i , index = "invsimpson"))
 names(taxonomic_evenness) <- c("Date (C.E.)", "1/D")
 
@@ -109,7 +100,7 @@ kable(taxonomic_evenness)
 ```
 
 ```{r plot_1/D}
-#  Plot of 1/D. Use 1/D values that were previously 
+# Plot of 1/D. Use 1/D values that were previously 
 # calculated to plot changing evenness through time.
 
 even <- read.csv("data/fig6b.csv", stringsAsFactors = FALSE, check.names = FALSE)
