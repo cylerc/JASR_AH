@@ -1,98 +1,71 @@
-```{r}
-#########################################################################################
-# R scripts for Arroyo Hondo Pueblo turkey isotope and faunal data.
-# 
-# written by Cyler Conrad, Department of Anthropology, University of New Mexico
-# cylerc@unm.edu
-#
-# Results described in:
-# Conrad, C., Jones, E.L., Newsome, S.D. and Schwartz, D.W. (in review). 
-# Eggshell, Bone Isotopes and Turkey Husbandry at Arroyo Hondo Pueblo. 
-# Journal of Archaeoloical Science: Reports.
-#
-#
-# NOTES
-# All data required to perform the analyses can be found at
-# XXXX (Conrad et al. XXXX). The script was run using R 
-# version 3.1.1 on Mac OS X 10.8.5
-#
-# Reference: 
-#
-# LICENSE
-# 
-# The MIT License (MIT)
-# 
-# Copyright (c) 2015 Cyler Conrad
-#   
-#   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-#   
-#   The above copyright notice and this permission notice shall be included in
-# all copies or substantial portions of the Software.
-# 
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-# THE SOFTWARE.
-################################################################################
+
+## R code for analysis of the Arroyo Hondo Pueblo turkey isotope and faunal data.
+ 
+Cyler Conrad, Department of Anthropology, University of New Mexico, cylerc@unm.edu
+
+Ben Marwick, Department of Anthropology, University of Washington, bmarwick@uw.edu
+
+This document contain R code to reproduce the plots and statistical analysis presented in 
+
+> Conrad, C., Jones, E.L., Newsome, S.D. and Schwartz, D.W. (in review).  Eggshell, Bone Isotopes and Turkey Husbandry at Arroyo Hondo Pueblo.  Journal of Archaeoloical Science: Reports.
+
+All data required to perform the analyses can be found at XXXX (Conrad et al. XXXX). The development version of this document can be found at https://github.com/cylerc/JASR_AH
+
+Details of the computational environment and software dependencies are listed at the end of this document. 
+ 
+```{r setup}
 # set the base directory for knitr to the directory above this one
 library(knitr)
 opts_knit$set(root.dir = '../')
 ```
 
-```{r}
-###############################################################################
-# CHUNK 1: Load libraries.
-################################################################################
-
-library(ggplot2) #Version 1.0.0
+```{r load_libraries, message = FALSE, warning = FALSE}
+# see the output of sessionInfo() at the bottom for package version numbers
+library(ggplot2) 
 library(reshape2)
 library(vegan)
-
+library(knitr)
+library(plyr)
+library(dplyr)
 ```
 
-```{r}
-###############################################################################
-# CHUNK 2-Calculate relative abundance. First, upload the Arroyo Hondo NISP table.
+```{r relative_abundance}
+# Calculate relative abundance. First, upload the Arroyo Hondo NISP table.
 # Second, take all turkey NISP values and divide by the column totals to calculate
 # the relative abundance of turtles per stratum. 
-################################################################################
-fn <- "data/ahNISP.csv" 
-ah <- read.csv(fn, stringsAsFactors = FALSE, check.names = FALSE)
-ah
-#1300-1315
-51/(sum(ah$`1300-1315`))
-#1315-1330
-202/(sum(ah$`1315-1330`))
-#1330-1340
-186/(sum(ah$`1330-1340`))
-#1340-1355
-317/(sum(ah$`1340-1355`))
-#1355-1365
-83/(sum(ah$`1355-1365`))
-#1365-1370
-92/(sum(ah$`1365-1370`))
-#1380-1410
-51/(sum(ah$`1380-1410`))
-#1410-1425
-152/(sum(ah$`1410-1425`))
+
+ah <- read.csv("data/ahNISP.csv", stringsAsFactors = FALSE, check.names = FALSE)
+kable(ah)
+
+# I replaced your code with more efficient code that show how R can work on vectors. The key idea is 'don't repeat yourself'. If you have the same line of code repeating with minor changes then you are not using the expressive power of R to save time!
+
+# here are all the turkey NISPs in a vectors
+turkey_NISP <- ah[ah$Taxon == "Meleagris gallopavo", -1]
+# here are the column totals (we drop the first column because it's a label)
+column_totals <- colSums(ah[ ,-1])
+# here's relative abundance for each time period, a vector divided by another vector, this is the magic of R!
+relative_abundance <-  turkey_NISP / column_totals
+# make into a tidy data frame ready for plotting
+relative_abundance <- t(relative_abundance)
+relative_abundance <- data_frame(`Date (C.E.)` = row.names(relative_abundance), 
+                                 `Relative Abundance` = relative_abundance[,1])
+
+# save as CSV 
+write.csv(relative_abundance, "data/fig6a.csv", row.names = FALSE)
+
+# display table
+kable(relative_abundance)
 ```
 
-```{r}
-###############################################################################
-# CHUNK 3-Figure 6a: Plot of relative abundance. Use relative abundance
+```{r plot_relative_abundance}
+# Plot of relative abundance. Use relative abundance
 # values that were previously calculated to create plot of changing abundance 
 # through time. 
-################################################################################
 
-fn <- "data/fig6a.csv" 
-ra <- read.csv(fn, stringsAsFactors = FALSE, check.names = FALSE)
-ra
-str(ra)
+ra <- read.csv("data/fig6a.csv" , stringsAsFactors = FALSE, check.names = FALSE)
 
-ggplot(ra, aes(ra$`Date (C.E.)`, ra$`Relative Abundance`)) +
+
+ggplot(ra, aes(`Date (C.E.)`, `Relative Abundance`)) +
   geom_bar(binwidth = 1.0, stat="identity") +
   coord_flip() +
   xlab("Date (C.E.)") +
@@ -118,33 +91,31 @@ ggsave(filename = "figures/fig_6a.png",
   
 ```
 
-```{r}
-###############################################################################
-# CHUNK 4-Calculate taxonomic evenness. Use the diversity function in vegan to 
+```{r taxonomic_evenness}
+# Calculate taxonomic evenness. Use the diversity function in vegan to 
 # calculate the inverse of Simpson's per stratum. 
-################################################################################
-diversity(ah$`1300-1315`, index = "invsimpson")
-diversity(ah$`1315-1330`, index = "invsimpson")
-diversity(ah$`1330-1340`, index = "invsimpson")
-diversity(ah$`1340-1355`, index = "invsimpson")
-diversity(ah$`1355-1365`, index = "invsimpson")
-diversity(ah$`1365-1370`, index = "invsimpson")
-diversity(ah$`1380-1410`, index = "invsimpson")
-diversity(ah$`1410-1425`, index = "invsimpson")
+
+# Here we compute over all the columns with numeric data at the same time
+# We drop the first column because it is the labels (and so non-numeric)
+# We use ldply from the plyr package to get the results back in a nice data frame
+taxonomic_evenness <- ldply(ah[,-1],  function(i) diversity(i , index = "invsimpson"))
+names(taxonomic_evenness) <- c("Date (C.E.)", "1/D")
+
+# save as CSV 
+write.csv(taxonomic_evenness, "data/fig6b.csv", row.names = FALSE)
+
+# display table
+kable(taxonomic_evenness)
 ```
 
-```{r}
-###############################################################################
-# CHUNK 5-Figure 6b: Plot of 1/D. Use 1/D values that were previously 
+```{r plot_1/D}
+#  Plot of 1/D. Use 1/D values that were previously 
 # calculated to plot changing evenness through time.
-################################################################################
 
-fn <- "data/fig6b.csv" 
-even <- read.csv(fn, stringsAsFactors = FALSE, check.names = FALSE)
-even
-str(even)
+even <- read.csv("data/fig6b.csv", stringsAsFactors = FALSE, check.names = FALSE)
+
  
-ggplot(even, aes(even$`1/D`, even$`Date (C.E.)`, group=1)) +
+ggplot(even, aes(`1/D`, `Date (C.E.)`, group=1)) +
   geom_point(size=4) +
   xlim(0.0,15.0) +
   xlab("1/D") +
@@ -169,15 +140,10 @@ ggsave(filename = "figures/fig_6b.png",
   
 ```
 
-```{r}
-###############################################################################
-# CHUNK 6-Figure 7: Plot of carbon and nitrogen isotopic data from Arroyo Hondo Pueblo.
-################################################################################
+```{r plot_C_N_isotope}
+#  Plot of carbon and nitrogen isotopic data from Arroyo Hondo Pueblo.
 
-fn <- "data/fig7.csv"
-turkey <- read.csv(fn, stringsAsFactors = FALSE, check.names = FALSE)
-turkey
-str(turkey) 
+turkey <- read.csv("data/fig7.csv", stringsAsFactors = FALSE, check.names = FALSE)
 
 ggplot(turkey, aes(x = d13C, y = d15N)) + 
   geom_point(aes(), size=3.5) + 
@@ -203,21 +169,43 @@ ggsave(filename = "figures/fig_7.png",
        height = fig_width/1.6, width =  fig_width)
 ```
 
-```{r}
-###############################################################################
-# CHUNK 7-Analysis: Calculate means and standard deviations for carbon and 
+```{r summary_isotope_data}
+# Calculate means and standard deviations for carbon and 
 # nitrogen isotopic data. 
-################################################################################
 
-turkey
-mean(turkey$d13C)
-#-8.22625
-sd(turkey$d13C)
-#1.841556
-mean(turkey$d15N)
-#9.02125
-sd(turkey$d15N)
-#1.424976
+summary_isotope_data <- apply(turkey[,-1], 2, function(x) c(mn=mean(x), sd=sd(x)))
+kable(summary_isotope_data)
+
 ```
+
+
+```{r session_info}
+# Computational environment and software dependencies for this analysis
+sessionInfo()
+```
+
+LICENSE
+ 
+The MIT License (MIT)
+
+Copyright (c) 2015 Cyler Conrad & Ben Marwick
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
 
 
