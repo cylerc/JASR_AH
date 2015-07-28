@@ -1,4 +1,4 @@
-ReadMe file for: Arroyo Hondo Pueblo Faunal, Scanning Electron Microscope and Stable Isotope Data by Cyler Conrad, Emily Lena Jones, Seth D. Newsome and Douglas W. Schwartz (2015). 
+ReadMe file for: Arroyo Hondo Pueblo Turkey Analysis and Scanning Electron Microscope Data by Cyler Conrad, Emily Lena Jones, Seth D. Newsome and Douglas W. Schwartz (2015). 
 
 Data folder: 
 
@@ -46,4 +46,4 @@ Figure 12: Scanning electron micrograph of the Arroyo Hondo eggshell sample AHE2
 
 References Cited: 
 
-Lang, Richard W. and Arthur H. Harris. 1984. The Faunal Remains from Arroyo Hondo Pueblo, New Mexico. Arroyo Hondo Archaeological Series Vol. 5, School of American Research Press, Santa Fe.  
+Lang, Richard W. and Arthur H. Harris. 1984. The Faunal Remains from Arroyo Hondo Pueblo, New Mexico. Arroyo Hondo Archaeological Series Vol. 5, School of American Research Press, Santa Fe.  
