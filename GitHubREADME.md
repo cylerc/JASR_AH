@@ -1,5 +1,5 @@
 # JASR_AH
-R script for Arroyo Hondo isotopic and faunal data. 
+R script for Arroyo Hondo isotopic and turkey data. 
 
 Author of this repository:
 Cyler Norman Conrad (cylerc@unm.edu)
