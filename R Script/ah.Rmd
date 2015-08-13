@@ -64,7 +64,7 @@ ggplot(ra, aes(`Date (C.E.)`, `Relative Abundance`)) +
   coord_flip() +
   xlab("Date (C.E.)") +
   ylab("Relative Abundance") +
-  ylim(0.0,0.3) +
+  ylim(0.0,0.2) +
   theme(
   legend.position="",
   axis.text.x = element_text(vjust=0.5, color="black", size=18),
@@ -79,7 +79,7 @@ ggplot(ra, aes(`Date (C.E.)`, `Relative Abundance`)) +
   strip.background = element_rect(colour="black", fill="white"))
 
 fig_width <- 300 # play with this number
-ggsave(filename = "figures/fig_6a.png",
+ggsave(filename = "Manuscript Figures/fig_6a.pdf",
        dpi = 600, units = "mm",
        height = fig_width/1.6, width =  fig_width)
   
@@ -107,8 +107,8 @@ even <- read.csv("data/fig6b.csv", stringsAsFactors = FALSE, check.names = FALSE
 
  
 ggplot(even, aes(`1/D`, `Date (C.E.)`, group=1)) +
-  geom_point(size=4) +
-  xlim(0.0,15.0) +
+  geom_point(size=7) +
+  xlim(5.0,15.0) +
   xlab("1/D") +
   ylab("Date (C.E.)") +
   theme(
@@ -125,7 +125,7 @@ ggplot(even, aes(`1/D`, `Date (C.E.)`, group=1)) +
   strip.background = element_rect(colour="black", fill="white"))
 
 fig_width <- 300 # play with this number
-ggsave(filename = "figures/fig_6b.png",
+ggsave(filename = "Manuscript Figures/fig_6b.png",
        dpi = 600, units = "mm",
        height = fig_width/1.6, width =  fig_width)
   
