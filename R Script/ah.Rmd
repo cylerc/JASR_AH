@@ -155,7 +155,36 @@ ggplot(turkey, aes(x = d13C, y = d15N)) +
 
 # save plot
 fig_width <- 300 # play with this number
-ggsave(filename = "figures/fig_7.png",
+ggsave(filename = "Manuscript Figures/fig_7.png",
+       dpi = 600, units = "mm",
+       height = fig_width/1.6, width =  fig_width)
+```
+
+```{r plot_C_C_isotope}
+#  Plot of collagen and apatite carbon isotopic data from Arroyo Hondo Pueblo.
+
+turkey2 <- read.csv("data/fig8.csv", stringsAsFactors = FALSE, check.names = FALSE)
+
+ggplot(turkey2, aes(x = d13Cc, y = d13Ca)) + 
+  geom_point(aes(), size=3.5) + 
+  xlab(expression(paste(delta^{13},'C collagen'))) + 
+  ylab(expression(paste(delta^{13},'C apatite'))) + 
+  xlim(-18.0,-7.0) +
+  ylim(-11,0) +
+  theme(
+  legend.position="",
+  axis.text.x = element_text(vjust=0.5, color="black", size=18),
+  axis.text.y = element_text(vjust=0.5, color="black", size=18), 
+  axis.title.y = element_text(vjust=1.0, color="black", size=22),
+  axis.title.x = element_text(vjust=0.1, color="black", size=22),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(), 
+  panel.background = element_blank(), 
+  axis.line = element_line(colour = "black"))
+
+# save plot
+fig_width <- 300 # play with this number
+ggsave(filename = "Manuscript Figures/fig_8.png",
        dpi = 600, units = "mm",
        height = fig_width/1.6, width =  fig_width)
 ```
@@ -167,8 +196,13 @@ ggsave(filename = "figures/fig_7.png",
 summary_isotope_data <- apply(turkey[,-1], 2, function(x) c(mn=mean(x), sd=sd(x)))
 kable(summary_isotope_data)
 
-```
+# Calculate means and standard deviations for collagen and 
+# apatite carbon data. 
 
+summary_isotope_data2 <- apply(turkey2[,-1], 2, function(x) c(mn=mean(x), sd=sd(x)))
+kable(summary_isotope_data2)
+
+```
 
 ```{r session_info}
 # Computational environment and software dependencies for this analysis
