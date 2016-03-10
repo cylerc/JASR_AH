@@ -128,7 +128,6 @@ fig_width <- 300 # play with this number
 ggsave(filename = "Manuscript Figures/fig_6b.png",
        dpi = 600, units = "mm",
        height = fig_width/1.6, width =  fig_width)
-  
 ```
 
 ```{r plot_C_N_isotope}
