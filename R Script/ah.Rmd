@@ -7,7 +7,7 @@ Ben Marwick, Department of Anthropology, University of Washington, bmarwick@uw.e
 
 This document contain R code to reproduce the plots and statistical analysis presented in 
 
-> Conrad, C., Jones, E.L., Newsome, S.D. and Schwartz, D.W. (in review).  Eggshell, Bone Isotopes and Turkey Husbandry at Arroyo Hondo Pueblo.  Journal of Archaeoloical Science: Reports.
+> Conrad, C., Jones, E.L., Newsome, S.D. and Schwartz, D.W. (in review).  Bone Isotopes, Eggshell and Turkey Husbandry at Arroyo Hondo Pueblo.  Journal of Archaeoloical Science: Reports.
 
 All data required to perform the analyses can be found at XXXX (Conrad et al. XXXX). The development version of this document can be found at https://github.com/cylerc/JASR_AH
 
