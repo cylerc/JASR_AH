@@ -45,7 +45,7 @@ relative_abundance <- data_frame(`Date (C.E.)` = row.names(relative_abundance),
                                  `Relative Abundance` = relative_abundance[,1])
 
 # save as CSV 
-write.csv(relative_abundance, "data/fig6a.csv", row.names = FALSE)
+write.csv(relative_abundance, "data/fig4a.csv", row.names = FALSE)
 
 # display table
 kable(relative_abundance)
@@ -56,7 +56,7 @@ kable(relative_abundance)
 # values that were previously calculated to create plot of changing abundance 
 # through time. 
 
-ra <- read.csv("data/fig6a.csv" , stringsAsFactors = FALSE, check.names = FALSE)
+ra <- read.csv("data/fig4a.csv" , stringsAsFactors = FALSE, check.names = FALSE)
 
 
 ggplot(ra, aes(`Date (C.E.)`, `Relative Abundance`)) +
@@ -79,7 +79,7 @@ ggplot(ra, aes(`Date (C.E.)`, `Relative Abundance`)) +
   strip.background = element_rect(colour="black", fill="white"))
 
 fig_width <- 300 # play with this number
-ggsave(filename = "Manuscript Figures/fig_6a.pdf",
+ggsave(filename = "Manuscript Figures/fig_4a.png",
        dpi = 600, units = "mm",
        height = fig_width/1.6, width =  fig_width)
   
@@ -93,7 +93,7 @@ taxonomic_evenness <- ldply(ah[,-1],  function(i) diversity(i , index = "invsimp
 names(taxonomic_evenness) <- c("Date (C.E.)", "1/D")
 
 # save as CSV 
-write.csv(taxonomic_evenness, "data/fig6b.csv", row.names = FALSE)
+write.csv(taxonomic_evenness, "data/fig4b.csv", row.names = FALSE)
 
 # display table
 kable(taxonomic_evenness)
@@ -103,7 +103,7 @@ kable(taxonomic_evenness)
 # Plot of 1/D. Use 1/D values that were previously 
 # calculated to plot changing evenness through time.
 
-even <- read.csv("data/fig6b.csv", stringsAsFactors = FALSE, check.names = FALSE)
+even <- read.csv("data/fig4b.csv", stringsAsFactors = FALSE, check.names = FALSE)
 
  
 ggplot(even, aes(`1/D`, `Date (C.E.)`, group=1)) +
@@ -125,7 +125,7 @@ ggplot(even, aes(`1/D`, `Date (C.E.)`, group=1)) +
   strip.background = element_rect(colour="black", fill="white"))
 
 fig_width <- 300 # play with this number
-ggsave(filename = "Manuscript Figures/fig_6b.png",
+ggsave(filename = "Manuscript Figures/fig_4b.png",
        dpi = 600, units = "mm",
        height = fig_width/1.6, width =  fig_width)
 ```
@@ -133,7 +133,7 @@ ggsave(filename = "Manuscript Figures/fig_6b.png",
 ```{r plot_C_N_isotope}
 #  Plot of carbon and nitrogen isotopic data from Arroyo Hondo Pueblo.
 
-turkey <- read.csv("data/fig7.csv", stringsAsFactors = FALSE, check.names = FALSE)
+turkey <- read.csv("data/fig5.csv", stringsAsFactors = FALSE, check.names = FALSE)
 
 ggplot(turkey, aes(x = d13C, y = d15N)) + 
   geom_point(aes(), size=3.5) + 
@@ -154,7 +154,7 @@ ggplot(turkey, aes(x = d13C, y = d15N)) +
 
 # save plot
 fig_width <- 300 # play with this number
-ggsave(filename = "Manuscript Figures/fig_7.png",
+ggsave(filename = "Manuscript Figures/fig_5.png",
        dpi = 600, units = "mm",
        height = fig_width/1.6, width =  fig_width)
 ```
@@ -162,7 +162,7 @@ ggsave(filename = "Manuscript Figures/fig_7.png",
 ```{r plot_C_C_isotope}
 #  Plot of collagen and apatite carbon isotopic data from Arroyo Hondo Pueblo.
 
-turkey2 <- read.csv("data/fig8.csv", stringsAsFactors = FALSE, check.names = FALSE)
+turkey2 <- read.csv("data/fig6.csv", stringsAsFactors = FALSE, check.names = FALSE)
 
 ggplot(turkey2, aes(x = d13Cc, y = d13Ca)) + 
   geom_point(aes(), size=3.5) + 
@@ -183,7 +183,7 @@ ggplot(turkey2, aes(x = d13Cc, y = d13Ca)) +
 
 # save plot
 fig_width <- 300 # play with this number
-ggsave(filename = "Manuscript Figures/fig_8.png",
+ggsave(filename = "Manuscript Figures/fig_6.png",
        dpi = 600, units = "mm",
        height = fig_width/1.6, width =  fig_width)
 ```
@@ -200,7 +200,6 @@ kable(summary_isotope_data)
 
 summary_isotope_data2 <- apply(turkey2[,-1], 2, function(x) c(mn=mean(x), sd=sd(x)))
 kable(summary_isotope_data2)
-
 ```
 
 ```{r session_info}
