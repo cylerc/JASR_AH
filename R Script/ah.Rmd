@@ -58,7 +58,6 @@ kable(relative_abundance)
 
 ra <- read.csv("data/fig4a.csv" , stringsAsFactors = FALSE, check.names = FALSE)
 
-
 ggplot(ra, aes(`Date (C.E.)`, `Relative Abundance`)) +
   geom_bar(binwidth = 1.0, stat="identity") +
   coord_flip() +
@@ -83,117 +82,6 @@ ggsave(filename = "Manuscript Figures/fig_4a.png",
        dpi = 600, units = "mm",
        height = fig_width/1.6, width =  fig_width)
   
-```
-
-```{r relative_abundance_lagomorph}
-# Calculate relative abundance. First, upload the Arroyo Hondo NISP table.
-# Second, take all turkey NISP values and divide by the column totals to calculate
-# the relative abundance of turtles per stratum. 
-
-ah <- read.csv("data/ahNISP.csv", stringsAsFactors = FALSE, check.names = FALSE)
-kable(ah)
-
-lagomorph_NISP <- ah[ah$Taxon == "Lagomorpha(total)", -1]
-column_totals <- colSums(ah[ ,-1])
-relative_abundance <-  lagomorph_NISP / column_totals
-relative_abundance <- t(relative_abundance)
-relative_abundance <- data_frame(`Date (C.E.)` = row.names(relative_abundance), 
-                                 `Relative Abundance` = relative_abundance[,1])
-
-# save as CSV 
-write.csv(relative_abundance, "data/fig9a.csv", row.names = FALSE)
-
-# display table
-kable(relative_abundance)
-```
-
-```{r plot_relative_abundance_lagomorph}
-# Plot of relative abundance. Use relative abundance
-# values that were previously calculated to create plot of changing abundance 
-# through time. 
-
-ra <- read.csv("data/fig9a.csv" , stringsAsFactors = FALSE, check.names = FALSE)
-
-
-ggplot(ra, aes(`Date (C.E.)`, `Relative Abundance`)) +
-  geom_bar(binwidth = 1.0, stat="identity") +
-  coord_flip() +
-  xlab("Date (C.E.)") +
-  ylab("Lagomorphs") +
-  ylim(0.0,0.3) +
-  theme(
-  legend.position="",
-  axis.text.x = element_text(vjust=0.5, color="black", size=18),
-  axis.text.y = element_text(vjust=0.5, color="black", size=18), 
-  axis.title.y = element_text(vjust=1.0, color="black", size=18),
-  axis.title.x = element_text(vjust=0.1, color="black", size=18),
-  panel.grid.major = element_blank(),
-  panel.grid.minor = element_blank(),
-  panel.background = element_blank(), 
-  axis.line = element_line(colour = "black"),
-  strip.text.x = element_text(size=15),
-  strip.background = element_rect(colour="black", fill="white"))
-
-fig_width <- 300 # play with this number
-ggsave(filename = "Manuscript Figures/fig_9a.png",
-       dpi = 600, units = "mm",
-       height = fig_width/1.6, width =  fig_width)
-  
-```
-
-```{r relative_abundance_artiodactyl}
-# Calculate relative abundance. First, upload the Arroyo Hondo NISP table.
-# Second, take all turkey NISP values and divide by the column totals to calculate
-# the relative abundance of turtles per stratum. 
-
-ah <- read.csv("data/ahNISP.csv", stringsAsFactors = FALSE, check.names = FALSE)
-kable(ah)
-
-artiodactyl_NISP <- ah[ah$Taxon == "Artiodactyla(total)", -1]
-column_totals <- colSums(ah[ ,-1])
-relative_abundance <-  artiodactyl_NISP / column_totals
-relative_abundance <- t(relative_abundance)
-relative_abundance <- data_frame(`Date (C.E.)` = row.names(relative_abundance), 
-                                 `Relative Abundance` = relative_abundance[,1])
-
-# save as CSV 
-write.csv(relative_abundance, "data/fig9b.csv", row.names = FALSE)
-
-# display table
-kable(relative_abundance)
-```
-
-```{r plot_relative_abundance_artiodactyl}
-# Plot of relative abundance. Use relative abundance
-# values that were previously calculated to create plot of changing abundance 
-# through time. 
-
-ra <- read.csv("data/fig9b.csv" , stringsAsFactors = FALSE, check.names = FALSE)
-
-
-ggplot(ra, aes(`Date (C.E.)`, `Relative Abundance`)) +
-  geom_bar(binwidth = 1.0, stat="identity") +
-  coord_flip() +
-  xlab("Date (C.E.)") +
-  ylab("Artiodactyls") +
-  ylim(0.0,0.3) +
-  theme(
-  legend.position="",
-  axis.text.x = element_text(vjust=0.5, color="black", size=18),
-  axis.text.y = element_text(vjust=0.5, color="black", size=18), 
-  axis.title.y = element_text(vjust=1.0, color="black", size=18),
-  axis.title.x = element_text(vjust=0.1, color="black", size=18),
-  panel.grid.major = element_blank(),
-  panel.grid.minor = element_blank(),
-  panel.background = element_blank(), 
-  axis.line = element_line(colour = "black"),
-  strip.text.x = element_text(size=15),
-  strip.background = element_rect(colour="black", fill="white"))
-
-fig_width <- 300 # play with this number
-ggsave(filename = "Manuscript Figures/fig_9b.png",
-       dpi = 600, units = "mm",
-       height = fig_width/1.6, width =  fig_width) 
 ```
 
 ```{r taxonomic_evenness}
@@ -239,6 +127,14 @@ fig_width <- 300 # play with this number
 ggsave(filename = "Manuscript Figures/fig_4b.png",
        dpi = 600, units = "mm",
        height = fig_width/1.6, width =  fig_width)
+```
+
+```{r mean and standard deviation}
+#mean and standard deviation for relative abundance and evenness values
+mean(ra$`Relative Abundance`)
+sd(ra$`Relative Abundance`)
+mean(even$`1/D`)
+sd(even$`1/D`)
 ```
 
 ```{r plot_C_N_isotope}
