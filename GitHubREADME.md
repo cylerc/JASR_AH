@@ -12,9 +12,9 @@ Results described in:
 
 Conrad, C., Jones, E.L., Newsome, S.D. and Schwartz, D.W. (in revision). Bone Isotopes, Eggshell and Turkey Husbandry at Arroyo Hondo Pueblo. Journal of Archaeoloical Science: Reports.
 
-NOTES All data required to perform the analyses can be found in (Conrad et al. in revision). The script was run using R version 3.1.1 on Mac OS X 10.8.5
+NOTES All data required to perform the analyses can be found in (Conrad et al. 2015). The script was run using R version 3.1.1 on Mac OS X 10.8.5
 
-Reference: Conrad, C., Jones, E.L., Newsome, S.D. and Schwartz, D.W. in revision.
+Reference: Conrad, C., Jones, E.L., Newsome, S.D. and Schwartz, D.W. 2015. Arroyo Hondo Pueblo Turkey Analysis and Scanning Electron Microscope Data  [dataset]. University of New Mexico. http://hdl.handle.net/1928/29606
 
 License:
 
