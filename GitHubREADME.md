@@ -30,4 +30,4 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 Contact:
 
-Cyler Norman Conrad, Ph.D. Graduate Student, Department of Anthropology, MSC01-1040, Anthropology 1, University of New Mexico, Albuquerque, NM, 87131 USA t. (+1) 505.277.4524 e. cylerc@unm.edu 
+Cyler Norman Conrad, Ph.D. Student, Department of Anthropology, MSC01-1040, Anthropology 1, University of New Mexico, Albuquerque, NM, 87131 USA t. (+1) 505.277.4524 e. cylerc@unm.edu 
