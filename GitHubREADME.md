@@ -10,7 +10,7 @@ Written by Cyler Conrad, Department of Anthropology, University of New Mexico
 
 Results described in:
 
-Conrad, C., Jones, E.L., Newsome, S.D. and Schwartz, D.W. (2016). Bone Isotopes, eggshell and turkey husbandry at Arroyo Hondo Pueblo. Journal of Archaeoloical Science: Reports. doi:http://dx.doi.org/10.1016/j.jasrep.2016.06.016
+Conrad, C., Jones, E.L., Newsome, S.D. and Schwartz, D.W. (2016). Bone isotopes, eggshell and turkey husbandry at Arroyo Hondo Pueblo. Journal of Archaeoloical Science: Reports. doi:http://dx.doi.org/10.1016/j.jasrep.2016.06.016
 
 NOTES All data required to perform the analyses can be found in (Conrad et al. 2015). The script was run using R version 3.1.1 on Mac OS X 10.8.5
 
